@@ -35,9 +35,9 @@ export function Toggle({ checked, onChange, label, disabled }: { checked: boolea
           if (r && !r.ok) { setOn(!next); toast(r.error ?? "Something went wrong", "error"); }
         });
       }}
-      className={cx("focus-ring relative h-5 w-8 shrink-0 rounded-full transition-colors duration-200 disabled:opacity-60", on ? "bg-inverse" : "bg-chart-track")}
+      className={cx("focus-ring relative block h-[18px] w-8 shrink-0 rounded-full p-0.5 transition-colors duration-200 disabled:cursor-not-allowed disabled:bg-disabled", on ? "bg-inverse" : "bg-[#2a2a2a29] enabled:hover:bg-[#2a2a2a38]")}
     >
-      <span className={cx("absolute top-0.5 size-4 rounded-full bg-white shadow-[0_1px_2px_#0004] transition-transform duration-200 ease-out", on ? "translate-x-[14px]" : "translate-x-0.5")} />
+      <span className={cx("block size-3.5 rounded-full bg-white shadow-[0_1px_3px_#0000001f] transition-transform duration-200 ease-out", on ? "translate-x-3.5" : "translate-x-0")} />
     </button>
   );
 }

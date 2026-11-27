@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Icon } from "./icon";
-import { Badge, Button, MerchantMark, statusTone } from "./ui";
+import { Badge, Button, Checkbox, MerchantMark, statusTone } from "./ui";
 import { useApp } from "./app-provider";
 import { cx, dateTime, money } from "@/lib/format";
 import type { Txn } from "@/lib/data";
@@ -66,23 +66,23 @@ export function TransactionsTable({ txns, pageSize = 10, compact = false }: { tx
         <table className="w-full min-w-[860px] text-sm">
           <thead>
             <tr className="border-b border-line-subtle bg-subtle text-left">
-              <th className="w-10 py-2.5 pl-4"><input type="checkbox" aria-label="Select page" checked={allOnPage} onChange={() => setSelected((s) => { const n = new Set(s); view.forEach((t) => (allOnPage ? n.delete(t.id) : n.add(t.id))); return n; })} className="size-4 accent-[#2a2a2a]" /></th>
-              {["Transaction", "Account", "Date", "Category", "Status"].map((h) => <th key={h} className={cx("eyebrow-sm py-2.5 font-medium", h === "Account" && "hidden xl:table-cell")}>{h}</th>)}
-              <th className="eyebrow-sm py-2.5 pr-4 text-right">Amount</th><th className="w-12" />
+              <th className="h-10 w-11 px-3 align-middle"><Checkbox label="Select page" checked={allOnPage} indeterminate={!allOnPage && view.some((t) => selected.has(t.id))} onChange={() => setSelected((s) => { const n = new Set(s); view.forEach((t) => (allOnPage ? n.delete(t.id) : n.add(t.id))); return n; })} /></th>
+              {["Transaction", "Account", "Date", "Category", "Status"].map((h) => <th key={h} className={cx("eyebrow-sm h-10 px-3 font-medium", h === "Account" && "hidden xl:table-cell")}>{h}</th>)}
+              <th className="eyebrow-sm h-10 px-3 text-right">Amount</th><th className="w-14" />
             </tr>
           </thead>
           <tbody>
             {view.map((t, i) => (
-              <tr key={t.id} onClick={() => setOpen(t.id)} className={cx("group cursor-pointer border-b border-line-subtle transition-colors last:border-0 animate-fade", selected.has(t.id) ? "bg-selected" : "hover:bg-subtle")} style={{ animationDelay: `${i * 25}ms` }}>
-                <td className="py-3 pl-4" onClick={(e) => e.stopPropagation()}><input type="checkbox" aria-label={`Select ${t.merchant}`} checked={selected.has(t.id)} onChange={() => toggle(t.id)} className="size-4 accent-[#2a2a2a]" /></td>
-                <td className="py-3"><div className="flex items-center gap-3"><MerchantMark merchant={t.merchant} category={t.category} /><div className="min-w-0"><p className="truncate">{t.merchant}</p><p className="truncate text-xs text-ink-2">{t.description}</p></div></div></td>
-                <td className="num hidden py-3 text-ink-2 xl:table-cell">•••• {t.account_mask}</td>
-                <td className="py-3 text-ink-2 whitespace-nowrap">{dateTime(t.occurred_at)}</td>
-                <td className="py-3">{t.category}</td>
-                <td className="py-3"><Badge tone={statusTone(t.status)}>{t.status}</Badge></td>
-                <td className={cx("num py-3 pr-4 text-right font-medium whitespace-nowrap", t.amount > 0 && "text-t-success")}>{money(t.amount, { sign: true })}</td>
-                <td className="relative py-3 pr-3" onClick={(e) => e.stopPropagation()}>
-                  <button aria-label="More actions" onClick={(e) => { e.stopPropagation(); setMenu(menu === t.id ? null : t.id); }} className="focus-ring grid size-8 place-items-center rounded-md text-ink hover:bg-hover"><Icon name="more" /></button>
+              <tr key={t.id} onClick={() => setOpen(t.id)} className={cx("group cursor-pointer border-b border-line-subtle transition-colors last:border-0 animate-fade", selected.has(t.id) ? "bg-selected" : "hover:bg-hover")} style={{ animationDelay: `${i * 25}ms` }}>
+                <td className="h-[60px] w-11 px-3 align-middle" onClick={(e) => e.stopPropagation()}><Checkbox label={`Select ${t.merchant}`} checked={selected.has(t.id)} onChange={() => toggle(t.id)} /></td>
+                <td className="px-3"><div className="flex items-center gap-2.5"><MerchantMark merchant={t.merchant} category={t.category} /><div className="flex min-w-0 flex-col gap-0.5"><p className="truncate font-medium leading-5">{t.merchant}</p><p className="truncate text-xs leading-4 text-ink-2">{t.description}</p></div></div></td>
+                <td className="num hidden px-3 text-ink-2 xl:table-cell">•••• {t.account_mask}</td>
+                <td className="px-3 text-ink-2 whitespace-nowrap">{dateTime(t.occurred_at)}</td>
+                <td className="px-3">{t.category}</td>
+                <td className="px-3"><Badge tone={statusTone(t.status)}>{t.status}</Badge></td>
+                <td className={cx("num px-3 text-right font-medium whitespace-nowrap", t.amount > 0 && "text-t-success")}>{money(t.amount, { sign: true })}</td>
+                <td className="relative w-14 px-3" onClick={(e) => e.stopPropagation()}>
+                  <button aria-label="More actions" onClick={(e) => { e.stopPropagation(); setMenu(menu === t.id ? null : t.id); }} className="focus-ring grid size-8 place-items-center rounded-lg text-ink hover:bg-hover"><Icon name="more" /></button>
                   <AnimatePresence>{menu === t.id && (
                     <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="absolute right-3 top-11 z-20 w-48 rounded-xl border border-line-subtle bg-surface p-1.5 text-left shadow-lg">
                       <button onClick={() => { setMenu(null); setOpen(t.id); }} className="flex w-full items-center gap-2 rounded-md px-2.5 py-2 hover:bg-hover"><Icon name="eye" />View details</button>

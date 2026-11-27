@@ -109,10 +109,23 @@ export function PageHeader({ title, subtitle, children }: { title: string; subti
   );
 }
 
+/* ---------------- Checkbox (16px, r4) ---------------- */
+const CHECK = "M9.778 2.186a.5.5 0 0 1 .777.628L4.889 9.814a.5.5 0 0 1-.78-.002L1.443 6.48a.5.5 0 1 1 .781-.625l2.278 2.848z";
+export function Checkbox({ checked, indeterminate, onChange, label }: { checked: boolean; indeterminate?: boolean; onChange: () => void; label: string }) {
+  const on = checked || indeterminate;
+  return (
+    <span className="relative grid size-4 shrink-0 place-items-center">
+      <input type="checkbox" aria-label={label} checked={checked} onChange={onChange} ref={(el) => { if (el) el.indeterminate = !!indeterminate && !checked; }}
+        className={cx("focus-ring absolute inset-0 m-0 cursor-pointer appearance-none rounded-[4px] transition-colors", on ? "bg-inverse hover:bg-[#4b4b4b]" : "border border-line-strong bg-surface")} />
+      {on && <svg viewBox="0 0 12 12" width={12} height={12} aria-hidden className="pointer-events-none relative animate-pop">{checked ? <path d={CHECK} fill="#fff" /> : <rect x={1.667} y={5.5} width={8.667} height={1} rx={0.5} fill="#fff" />}</svg>}
+    </span>
+  );
+}
+
 /* ---------------- Visual atoms ---------------- */
-export function Tile({ icon, tone = "neutral", size = 32 }: { icon: IconName; tone?: Tone; size?: number }) {
+export function Tile({ icon, tone = "neutral", size = 32, round }: { icon: IconName; tone?: Tone; size?: number; round?: boolean }) {
   const map: Record<Tone, string> = { neutral: "bg-shell text-ink-2", success: "bg-success-subtle text-t-success", warning: "bg-warning-subtle text-warning", error: "bg-error-subtle text-t-error", info: "bg-info-subtle text-info", brand: "bg-brand-subtle text-brand" };
-  return <span className={cx("grid shrink-0 place-items-center rounded-lg", map[tone])} style={{ width: size, height: size }}><Icon name={icon} size={18} /></span>;
+  return <span className={cx("grid shrink-0 place-items-center", round ? "rounded-full" : "rounded-lg", map[tone])} style={{ width: size, height: size }}><Icon name={icon} size={round ? (size >= 48 ? 24 : size <= 24 ? 12 : 18) : 18} /></span>;
 }
 
 const BRAND_RE = /^(Netflix|Amazon|Uniqlo|Starbucks|Uber|Dropbox|Spotify|QuickBooks|Ticketmaster)\b/;
@@ -120,11 +133,11 @@ export function brandOf(name: string): Brand | null { const m = name.match(BRAND
 
 export function MerchantLogo({ brand, size = 32 }: { brand: Brand; size?: number }) {
   if (brand === "Ticketmaster")
-    return <span className="grid shrink-0 place-items-center rounded-lg bg-[#026CDF] font-bold text-white" style={{ width: size, height: size, fontSize: size * 0.62 }} aria-label="Ticketmaster">t</span>;
+    return <span className="grid shrink-0 place-items-center rounded-[8px] bg-[#026CDF] font-bold text-white" style={{ width: size, height: size, fontSize: size * 0.6875, lineHeight: 1 }} aria-label="Ticketmaster">t</span>;
   const l = LOGOS[brand];
   const inner = size * l.scale;
   return (
-    <span className="grid shrink-0 place-items-center overflow-hidden rounded-lg" style={{ width: size, height: size, background: l.bg, boxShadow: l.bg === "#FFFFFF" ? "inset 0 0 0 1px #00000014" : undefined }} aria-label={brand} role="img">
+    <span className="grid shrink-0 place-items-center overflow-hidden rounded-[8px]" style={{ width: size, height: size, background: l.bg, boxShadow: l.bg === "#FFFFFF" ? "inset 0 0 0 1px #00000014" : undefined }} aria-label={brand} role="img">
       <svg viewBox="0 0 24 24" width={inner} height={inner} aria-hidden><path d={l.d} fill={l.fg} /></svg>
     </span>
   );
@@ -139,7 +152,7 @@ export function MerchantMark({ merchant, category, size = 32 }: { merchant: stri
   const b = brandOf(merchant);
   if (b) return <MerchantLogo brand={b} size={size} />;
   const [icon, tone] = CAT_ICON[category] ?? CAT_ICON.Other;
-  return <Tile icon={icon} tone={tone} size={size} />;
+  return <Tile icon={icon} tone={tone} size={size} round />;
 }
 
 export function Avatar({ initials = "SA", size = 32, icon }: { initials?: string; size?: number; icon?: IconName }) {

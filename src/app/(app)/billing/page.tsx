@@ -36,8 +36,7 @@ export default async function BillingPage() {
               <div className="min-w-0 flex-1"><p className="text-sm">{s.name}</p><p className="text-xs text-ink-2">{s.plan} · {s.cycle}</p></div>
               <Badge tone={tone(s.state)}>{s.state}</Badge>
               <div className="w-28 text-right"><p className="num text-sm">{money(s.amount)}{s.plan.includes("yearly") ? "/yr" : ""}</p><p className="text-xs text-ink-2">Next · {new Date(s.next_date).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}</p></div>
-              <AutopayToggle id={s.id} checked={s.autopay} />
-              <span className="w-14 text-sm">Autopay</span>
+              <span className="flex items-center gap-2"><AutopayToggle id={s.id} checked={s.autopay} /><span className="whitespace-nowrap text-sm">Autopay</span></span>
               <button aria-label="More" className="grid size-8 place-items-center rounded-md hover:bg-hover"><Icon name="more" /></button>
             </div>
           ))}
