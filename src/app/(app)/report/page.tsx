@@ -55,7 +55,7 @@ export default function ReportPage() {
       <Shell title="Insights" className="[animation-delay:240ms]" bodyClass="p-4 flex flex-col gap-2">
         <Dismissible tone="info" icon="info" title="Dining is up 22% vs June" body="$520 on food & drink — mostly weekends. Set a $450 category budget?" />
         <Dismissible tone="success" icon="success" delay={60} title="You saved $1,470 in July" body="That’s 31% of income, above your 6-month average of 29%." />
-        <Dismissible tone="warning" icon="warning" delay={120} title="3 subscriptions renew next week" body="Netflix, Spotify and iCloud · $41.97 total on Aug 8–10." />
+        <Dismissible tone="warning" icon="warning" delay={120} title="3 subscriptions renew next week" body="Streamly, Tuneful and Cloudvault · $41.97 total on Aug 8–10." />
       </Shell>
     </div>
   );

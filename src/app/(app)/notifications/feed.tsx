@@ -25,7 +25,7 @@ export function NotificationFeed({ items }: { items: Notif[] }) {
   const router = useRouter();
   const { toast } = useApp();
   const [now] = useState(() => Date.now());
-  const filtered = items.filter((n) => tab === "All" || (tab.startsWith("Unread") ? !n.read_at : tab === "Alerts" ? ["warning", "error"].includes(n.tone) : tab === "Security" ? ["shield", "laptop"].includes(n.icon) : ["invoice", "loan", "Dropbox", "dollar"].includes(n.icon)));
+  const filtered = items.filter((n) => tab === "All" || (tab.startsWith("Unread") ? !n.read_at : tab === "Alerts" ? ["warning", "error"].includes(n.tone) : tab === "Security" ? ["shield", "laptop"].includes(n.icon) : ["invoice", "loan", "Stashbox", "dollar"].includes(n.icon)));
   const groups = useMemo(() => {
     const g: Record<string, Notif[]> = { Today: [], "This week": [], Earlier: [] };
     for (const n of filtered) { const h = (now - new Date(n.created_at).getTime()) / 36e5; (h < 24 ? g.Today : h < 168 ? g["This week"] : g.Earlier).push(n); }

@@ -39,7 +39,7 @@ export const LOANS = [
 export const UPCOMING = [
   { m: "Jul", d: 28, title: "Car loan · Toyota RAV4", from: "From Checking •••• 1233", amount: 486.2, autopay: true },
   { m: "Aug", d: 3, title: "Student loan", from: "From Checking •••• 1233", amount: 210, autopay: false },
-  { m: "Aug", d: 15, title: "Visa •••• 4402 statement", from: "From Savings •••• 2345", amount: 250, autopay: false },
+  { m: "Aug", d: 15, title: "Nova •••• 4402 statement", from: "From Savings •••• 2345", amount: 250, autopay: false },
   { m: "Aug", d: 28, title: "Car loan · Toyota RAV4", from: "From Checking •••• 1233", amount: 486.2, autopay: true },
 ];
 export const LOAN_HISTORY = [

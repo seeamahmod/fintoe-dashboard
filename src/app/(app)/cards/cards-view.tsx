@@ -23,7 +23,7 @@ function PaymentCard({ c }: { c: Card }) {
       <div className="flex items-center justify-between"><span className="flex items-center gap-1.5 text-lg font-medium"><Icon name="sparkle" />FinToe</span><span className="text-[11px] uppercase tracking-wider opacity-90">{c.kind}</span></div>
       <div className="mt-5 h-7 w-9 rounded-md bg-[#f2dc9a]" />
       <p className="num mt-4 text-xl tracking-[0.15em]">•••• •••• •••• {c.mask}</p>
-      <div className="mt-3 flex items-end justify-between"><span className="text-[11px] tracking-wider">SEEAM AHMOD</span><span className="num text-xs">09/29</span><span className="text-xl font-bold italic">VISA</span></div>
+      <div className="mt-3 flex items-end justify-between"><span className="text-[11px] tracking-wider">SEEAM AHMOD</span><span className="num text-xs">09/29</span><span className="text-xl font-bold italic">NOVA</span></div>
       {c.frozen && <span className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-medium text-t-info"><Icon name="freeze" size={14} />Frozen</span>}
     </div>
   );
@@ -84,7 +84,7 @@ export function CardsView({ cards }: { cards: Card[] }) {
           ))}
         </Shell>
         <div className="flex items-center gap-3 rounded-xl border border-error p-4">
-          <div className="flex-1"><p className="text-sm font-medium">Cancel this card</p><p className="text-xs text-ink-2">Permanently closes Visa •••• {card.mask}. Recurring payments on it will fail.</p></div>
+          <div className="flex-1"><p className="text-sm font-medium">Cancel this card</p><p className="text-xs text-ink-2">Permanently closes Nova •••• {card.mask}. Recurring payments on it will fail.</p></div>
           {card.frozen && <Badge tone="info">Frozen</Badge>}
           <button onClick={() => toast("For safety, cancelling needs a confirmation from support", "info")} className={btnClass("destructive", "sm")}><Icon name="trash" size={16} />Cancel card</button>
         </div>

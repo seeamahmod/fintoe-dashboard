@@ -74,7 +74,7 @@ function NotificationsTab({ prefs }: { prefs: Prefs }) {
 function SecurityTab() {
   const [pw, setPw] = useState(false);
   const { toast } = useApp();
-  const checks: [string, true | string][] = [["Strong password", true], ["Two-factor authentication", true], ["Face ID for payments", true], ["Recovery codes saved", true], ["Passkey on every device", "iPhone 15 and iPad have none"]];
+  const checks: [string, true | string][] = [["Strong password", true], ["Two-factor authentication", true], ["Face ID for payments", true], ["Recovery codes saved", true], ["Passkey on every device", "Lumen Phone 15 and Lumen Tab have none"]];
   return (
     <div className="grid grid-cols-[minmax(0,1.6fr)_minmax(360px,1fr)] items-start gap-4">
       <div className="flex flex-col gap-4">
@@ -82,20 +82,20 @@ function SecurityTab() {
           <Item icon="key" title="Password" sub="Last changed Apr 12, 2026 · 3 months ago"><Button size="sm" onClick={() => setPw(true)}>Change password</Button></Item>
           <Item icon="shield" title="Two-factor authentication" sub="Authenticator app · backup by SMS to •••-0132"><Badge tone="success">On</Badge><Button size="sm" onClick={() => toast("2FA settings opened", "info")}>Manage</Button></Item>
           <Item icon="lock" title="Face ID for payments" sub="Required for any payment over $500"><Toggle checked label="Face ID" /></Item>
-          <Item icon="laptop" title="Passkeys" sub="1 passkey · MacBook Pro · added May 2, 2026"><Button size="sm" icon="plus" onClick={() => toast("Follow the prompt on your device", "info")}>Add passkey</Button></Item>
+          <Item icon="laptop" title="Passkeys" sub="1 passkey · Lumen Book Pro · added May 2, 2026"><Button size="sm" icon="plus" onClick={() => toast("Follow the prompt on your device", "info")}>Add passkey</Button></Item>
           <Item icon="copy" title="Recovery codes" sub="8 of 10 unused · generated Jan 3, 2026" last><Button size="sm" variant="ghost" onClick={() => toast("Codes hidden — verify to view", "info")}>View codes</Button></Item>
         </Shell>
         <Shell title="Active sessions">
-          <Item icon="laptop" title="MacBook Pro · Chrome" sub="San Francisco, CA · this device · active now"><Badge tone="success">This device</Badge></Item>
-          <Item icon="mobile" title="iPhone 15 · FinToe app" sub="San Francisco, CA · 2 h ago"><Button size="sm" variant="ghost" onClick={() => toast("Signed out iPhone 15")}>Sign out</Button></Item>
-          <Item icon="mobile" title="iPad · Safari" sub="Oakland, CA · Jul 13 · first seen 3 days ago" last><Badge tone="warning">New</Badge><Button size="sm" variant="ghost" onClick={() => toast("Signed out iPad")}>Sign out</Button></Item>
+          <Item icon="laptop" title="Lumen Book Pro · Browser" sub="San Francisco, CA · this device · active now"><Badge tone="success">This device</Badge></Item>
+          <Item icon="mobile" title="Lumen Phone 15 · FinToe app" sub="San Francisco, CA · 2 h ago"><Button size="sm" variant="ghost" onClick={() => toast("Signed out Lumen Phone 15")}>Sign out</Button></Item>
+          <Item icon="mobile" title="Lumen Tab · Web" sub="Oakland, CA · Jul 13 · first seen 3 days ago" last><Badge tone="warning">New</Badge><Button size="sm" variant="ghost" onClick={() => toast("Signed out Lumen Tab")}>Sign out</Button></Item>
         </Shell>
       </div>
       <Shell title="Security checkup" bodyClass="p-4 flex flex-col gap-3">
         <div className="flex items-end justify-between"><div><p className="num text-[32px] font-medium leading-10">4 of 5</p><p className="text-xs text-ink-2">steps done · 1 bar = 1 step</p></div><Badge tone="success">Good</Badge></div>
         <StripeMeter total={5} filled={4} color="var(--color-success)" height={8} />
         <div className="flex flex-col gap-2 pt-1">{checks.map(([l, ok]) => <div key={l} className="flex items-start gap-2 text-sm"><Icon name={ok === true ? "success" : "warning"} className={ok === true ? "text-t-success" : "text-warning"} /><div>{l}{ok !== true && <p className="text-xs text-t-warning">{ok}</p>}</div></div>)}</div>
-        <Button variant="primary" iconRight="arrow-right" className="w-full" onClick={() => toast("Open FinToe on your iPhone to finish", "info")}>Add a passkey on iPhone</Button>
+        <Button variant="primary" iconRight="arrow-right" className="w-full" onClick={() => toast("Open FinToe on your Lumen Phone to finish", "info")}>Add a passkey on Lumen Phone</Button>
       </Shell>
       <ChangePassword open={pw} onClose={() => setPw(false)} />
     </div>
@@ -178,9 +178,9 @@ function AppsTab() {
   return (
     <div className="grid grid-cols-[minmax(0,1.6fr)_minmax(360px,1fr)] items-start gap-4">
       <Shell title="Apps with access">
-        {[["QuickBooks", "Bookkeeping", ["Read transactions", "Export statements"], "2 days ago"], ["Splitwise", "Shared expenses", ["Read transactions"], "Jul 12"], ["Sheets budget sync", "Spreadsheet add-on", ["Read balances"], "Jun 30"]].map(([n, c, scopes, last], i) => (
+        {[["Ledgerly", "Bookkeeping", ["Read transactions", "Export statements"], "2 days ago"], ["Splitwise", "Shared expenses", ["Read transactions"], "Jul 12"], ["Sheets budget sync", "Spreadsheet add-on", ["Read balances"], "Jun 30"]].map(([n, c, scopes, last], i) => (
           <div key={n as string} className={cx("flex items-center gap-3 px-4 py-3.5", i < 2 && "border-b border-line-subtle")}>
-            {n === "QuickBooks" ? <MerchantLogo brand="QuickBooks" size={36} /> : <Tile icon="link" size={36} />}
+            {n === "Ledgerly" ? <MerchantLogo brand="Ledgerly" size={36} /> : <Tile icon="link" size={36} />}
             <div className="flex-1"><p className="text-sm">{n as string} <span className="ml-1 text-xs text-ink-3">{c as string}</span></p><div className="mt-1 flex gap-1.5">{(scopes as string[]).map((s) => <span key={s} className="rounded-full bg-shell px-2 py-0.5 text-[11px] text-ink-2">{s}</span>)}</div></div>
             <div className="text-right text-xs"><p className="text-ink-3">Last used</p><p>{last as string}</p></div>
             <Button size="sm" onClick={() => toast("Access settings opened", "info")}>Manage</Button>

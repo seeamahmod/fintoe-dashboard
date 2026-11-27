@@ -9,7 +9,7 @@ import { money } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Billing & subscriptions" };
 
-const INVOICES = [["NYT", "Jul 24, 2026", 4.25, "Failed"], ["Adobe Creative Cloud", "Jul 21, 2026", 59.99, "Paid"], ["City Gym", "Jul 18, 2026", 45, "Paid"], ["iCloud+", "Jul 10, 2026", 1.99, "Paid"], ["Spotify", "Jul 9, 2026", 16.99, "Paid"]] as const;
+const INVOICES = [["Daily Ledger", "Jul 24, 2026", 4.25, "Failed"], ["Canvas Studio", "Jul 21, 2026", 59.99, "Paid"], ["City Gym", "Jul 18, 2026", 45, "Paid"], ["Cloudvault+", "Jul 10, 2026", 1.99, "Paid"], ["Tuneful", "Jul 9, 2026", 16.99, "Paid"]] as const;
 
 export default async function BillingPage() {
   const subs = await getSubscriptions();
@@ -42,7 +42,7 @@ export default async function BillingPage() {
           ))}
         </Shell>
         <div className="flex flex-col gap-4">
-          <Dismissible tone="error" icon="error" title="NYT payment failed" body="Visa •••• 4402 was declined on Jul 24. Update the card to keep access." />
+          <Dismissible tone="error" icon="error" title="Daily Ledger payment failed" body="Nova •••• 4402 was declined on Jul 24. Update the card to keep access." />
           <Dismissible tone="info" icon="info" delay={60} title={`Save ${money(unused.reduce((a, s) => a + s.amount, 0))} / month`} body={`${unused.map((u) => u.name).join(" and ")} haven’t been used in 40+ days. Review or cancel.`} />
           <Shell title="Recent invoices" className="[animation-delay:180ms]" action={<ShellLink href="/billing">View all</ShellLink>}>
             {INVOICES.map(([n, d, a, st]) => (

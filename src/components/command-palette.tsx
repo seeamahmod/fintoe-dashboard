@@ -49,7 +49,7 @@ export function CommandPalette({ open, onClose, txns, subs }: { open: boolean; o
     const s = q.trim().toLowerCase();
     if (!s) {
       return [
-        ...["Netflix", "Oakwood Rentals", "Starbucks"].map((t) => ({ id: "r-" + t, group: "Recent searches", title: t, sub: "Search", lead: <Tile icon="clock" />, run: () => setQ(t) })),
+        ...["Streamly", "Oakwood Rentals", "Brewhouse"].map((t) => ({ id: "r-" + t, group: "Recent searches", title: t, sub: "Search", lead: <Tile icon="clock" />, run: () => setQ(t) })),
         { id: "a-add", group: "Quick actions", title: "Add transaction", sub: "Record cash or an external payment", lead: <Tile icon="plus" />, meta: <Kbd>N</Kbd>, run: () => { onClose(); openAddTxn(); } },
         { id: "a-card", group: "Quick actions", title: "Freeze a card", sub: "Pause a card instantly", lead: <Tile icon="freeze" />, run: () => go("/cards") },
         { id: "a-msg", group: "Quick actions", title: "Message support", sub: "We usually reply in 5 minutes", lead: <Tile icon="messages" />, run: () => go("/messages") },

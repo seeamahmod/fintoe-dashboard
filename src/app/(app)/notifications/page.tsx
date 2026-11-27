@@ -20,7 +20,7 @@ export default async function NotificationsPage() {
             {[[String(unread), "Unread", "text-ink"], [String(action), "Needs action", "text-t-error"], [String(items.length), "Total", "text-ink"]].map(([n, l, c]) => <div key={l} className="rounded-lg bg-subtle px-3 py-2.5"><p className={`num text-2xl font-medium ${c}`}>{n}</p><p className="text-xs text-ink-2">{l}</p></div>)}
           </Shell>
           <Shell title="Delivery" action={<ShellLink href="/settings">Settings</ShellLink>}>
-            <PrivacyToggle k="ch.push" def label="Push notifications" sub="iPhone 15 · FinToe app" prefs={prefs} />
+            <PrivacyToggle k="ch.push" def label="Push notifications" sub="Lumen Phone 15 · FinToe app" prefs={prefs} />
             <PrivacyToggle k="ch.email" def label="Email" sub="s•••m@example.com" prefs={prefs} />
             <PrivacyToggle k="ch.sms" def={false} label="SMS" sub="+1 (415) •••-0132" prefs={prefs} last />
           </Shell>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { Icon, type IconName } from "./icon";
-import { LOGOS, type Brand } from "@/lib/logos-data";
+import { BRANDS, LOGOS, type Brand } from "@/lib/logos-data";
 import { cx } from "@/lib/format";
 
 /* ---------------- Buttons ---------------- */
@@ -128,17 +128,16 @@ export function Tile({ icon, tone = "neutral", size = 32, round }: { icon: IconN
   return <span className={cx("grid shrink-0 place-items-center", round ? "rounded-full" : "rounded-lg", map[tone])} style={{ width: size, height: size }}><Icon name={icon} size={round ? (size >= 48 ? 24 : size <= 24 ? 12 : 18) : 18} /></span>;
 }
 
-const BRAND_RE = /^(Netflix|Amazon|Uniqlo|Starbucks|Uber|Dropbox|Spotify|QuickBooks|Ticketmaster)\b/;
+const BRAND_RE = new RegExp(`^(${BRANDS.join("|")})\\b`);
 export function brandOf(name: string): Brand | null { const m = name.match(BRAND_RE); return m ? (m[1] as Brand) : null; }
 
+/** Fictional merchant mark: an 18px glyph in a 32px tile (scales with size), matching the Figma Merchant Logo set. */
 export function MerchantLogo({ brand, size = 32 }: { brand: Brand; size?: number }) {
-  if (brand === "Ticketmaster")
-    return <span className="grid shrink-0 place-items-center rounded-[8px] bg-[#026CDF] font-bold text-white" style={{ width: size, height: size, fontSize: size * 0.6875, lineHeight: 1 }} aria-label="Ticketmaster">t</span>;
   const l = LOGOS[brand];
-  const inner = size * l.scale;
+  const inner = size * 0.5625;
   return (
-    <span className="grid shrink-0 place-items-center overflow-hidden rounded-[8px]" style={{ width: size, height: size, background: l.bg, boxShadow: l.bg === "#FFFFFF" ? "inset 0 0 0 1px #00000014" : undefined }} aria-label={brand} role="img">
-      <svg viewBox="0 0 24 24" width={inner} height={inner} aria-hidden><path d={l.d} fill={l.fg} /></svg>
+    <span className="grid shrink-0 place-items-center overflow-hidden rounded-[8px]" style={{ width: size, height: size, background: l.bg, boxShadow: l.border ? "inset 0 0 0 1px #00000014" : undefined }} aria-label={brand} role="img">
+      <svg viewBox="0 0 24 24" width={inner} height={inner} fill={l.filled ? l.fg : "none"} stroke={l.fg} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden dangerouslySetInnerHTML={{ __html: l.svg }} />
     </span>
   );
 }

@@ -72,10 +72,10 @@ export function AddTransaction({ open, onClose }: { open: boolean; onClose: () =
                 <span className="relative block"><Icon name="dollar" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2" />
                   <input ref={first} name="amount" required inputMode="decimal" type="number" step="0.01" min="0.01" max="50000" placeholder="0.00" className={cx(inputClass, "pl-10 num")} /></span>
               </Field>
-              <Field label="Merchant or payee"><input name="merchant" required maxLength={80} placeholder="e.g. Uniqlo" className={inputClass} /></Field>
+              <Field label="Merchant or payee"><input name="merchant" required maxLength={80} placeholder="e.g. Threadline" className={inputClass} /></Field>
               <div className="grid grid-cols-2 gap-3">
                 <Field label="Category"><SelectBox name="category" icon="shopping" defaultValue={kind === "Income" ? "Salary" : "Shopping"}>{CATS.map((c) => <option key={c}>{c}</option>)}</SelectBox></Field>
-                <Field label="Account"><SelectBox name="account" icon="bank" defaultValue="1233"><option value="1233">Checking •••• 1233</option><option value="2345">Savings •••• 2345</option><option value="4402">Visa •••• 4402</option></SelectBox></Field>
+                <Field label="Account"><SelectBox name="account" icon="bank" defaultValue="1233"><option value="1233">Checking •••• 1233</option><option value="2345">Savings •••• 2345</option><option value="4402">Nova •••• 4402</option></SelectBox></Field>
                 <Field label="Date"><input name="date" type="date" required defaultValue={today()} max={today()} className={inputClass} /></Field>
                 <Field label="Status"><SelectBox name="status" defaultValue="Completed"><option>Completed</option><option>Pending</option></SelectBox></Field>
               </div>
