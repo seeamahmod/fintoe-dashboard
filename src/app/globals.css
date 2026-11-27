@@ -88,6 +88,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 /* ---------- Reusable patterns ---------- */
 @layer components {
+  .bone { border-radius: 8px; background: linear-gradient(90deg, #ededeb 0%, #f6f6f4 40%, #ededeb 80%) 0 0 / 800px 100% #ededeb; animation: shimmer 1.2s linear infinite; }
   .eyebrow { font-family: var(--font-num); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink); }
   .eyebrow-sm { font-family: var(--font-num); font-weight: 500; font-size: 11px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-2); }
   .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
