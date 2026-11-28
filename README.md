@@ -10,7 +10,7 @@ A personal-banking SaaS dashboard built from the FinToe Figma design system. It 
 - **Tailwind CSS v4**, with tokens taken from the Figma variables
 - **Supabase** for Postgres and Auth
 - **motion** for small UI animations; `prefers-reduced-motion` is respected
-- **Lucide** icons (ISC License); all merchant names and logos are fictional placeholders
+- **Nucleo** UI icons (licensed, outline 18px); all merchant names and logos are fictional placeholders
 
 ## Security
 

@@ -137,7 +137,7 @@ export function MerchantLogo({ brand, size = 32 }: { brand: Brand; size?: number
   const inner = size * 0.5625;
   return (
     <span className="grid shrink-0 place-items-center overflow-hidden rounded-[8px]" style={{ width: size, height: size, background: l.bg, boxShadow: l.border ? "inset 0 0 0 1px #00000014" : undefined }} aria-label={brand} role="img">
-      <svg viewBox="0 0 24 24" width={inner} height={inner} fill={l.filled ? l.fg : "none"} stroke={l.fg} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden dangerouslySetInnerHTML={{ __html: l.svg }} />
+      <svg viewBox="0 0 18 18" width={inner} height={inner} style={{ color: l.fg }} strokeLinecap="round" strokeLinejoin="round" aria-hidden dangerouslySetInnerHTML={{ __html: l.svg }} />
     </span>
   );
 }
